@@ -13,8 +13,10 @@ $(document).ready(function(){
     * ========================================================
     */
     var addPlayer = function(player_datas) {
+        console.log(player_datas.id)
+        console.log(id)
         $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div id="poissons" class="poissons_container"></div></div>');
-        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.pseudo+'.png"), url("/img/basique.png")')
+        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.name+'.png"), url("/img/basique.png")')
         if (player_datas.id === id) {
             $('#player_'+player_datas.id).addClass('my_player');
         }
@@ -39,29 +41,35 @@ $(document).ready(function(){
     * Receive events
     * ========================================================
     */
+
+    // Render the login view
     socket.on('page connect', function(datas){
+        console.log('page connect')
         $('#content').html(datas.view);
         // Set your name
         $('#send_pseudo').click(function() {
             socket.emit('set pseudo', $('.input_pseudo').val());
-            console.log('send '+$('.input_pseudo').val())
         });
     });
+
     // Start game
     socket.on('start game', function(datas){
+        console.log('start game')
         // Your id
         id = datas.user_id;
+        console.log('you are '+id);
 
         // View
         $('#content').html(datas.view);
 
         // Events
         $('#pecher').click(function() {
+            console.log('pecher #bouchon_'+id)
             socket.emit('peche');
         });
 
-        // Add all players exept you
-        datas.players.forEach(function(player) {
+        // Add all players
+        $.each(datas.players, function(index, player) {
             addPlayer(player);
         });
 
@@ -69,18 +77,43 @@ $(document).ready(function(){
 
     // New player join the game
     socket.on('new user', function(player){
+        console.log('new user')
         addPlayer(player);
     });
 
     // A player left the game
     socket.on('bye user', function(user_id){
+        console.log('bye user')
         removePlayer(user_id);
     });
 
-    // A player peche something
-    socket.on('peche', function(user_id){
+    // A player get something
+    socket.on('got it', function(user_id){
+        console.log('peche')
+        $('#bouchon_'+user_id).removeClass('ca_mord');
         addFish(user_id);
         console.log('#player_'+user_id+' catch something');
+    });
+
+    // A player get something
+    socket.on('too late', function(user_id){
+        console.log('peche')
+        $('#bouchon_'+user_id).removeClass('ca_mord');
+        $('#bouchon_'+user_id).removeClass('too_late');
+        $('#bouchon_'+user_id).addClass('too_late');
+        console.log('#player_'+user_id+' got nothing');
+    });
+
+    // Invalid username
+    socket.on('invalid name', function() {
+        console.log('invalid name')
+        $('#error').html('Votre nom n\'est pas valide.')
+    });
+
+    // a fish is ready to get catched
+    socket.on('ca mord', function(user_id) {
+        console.log('ca mord')
+        $('#bouchon_'+user_id).addClass('ca_mord');
     });
 
 

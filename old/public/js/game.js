@@ -13,8 +13,6 @@ $(document).ready(function(){
     * ========================================================
     */
     var addPlayer = function(player_datas) {
-        console.log(player_datas.id)
-        console.log(id)
         $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div id="poissons" class="poissons_container"></div></div>');
         $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.pseudo+'.png"), url("/img/basique.png")')
         if (player_datas.id === id) {
@@ -41,21 +39,18 @@ $(document).ready(function(){
     * Receive events
     * ========================================================
     */
-
-    // Render the login view
     socket.on('page connect', function(datas){
         $('#content').html(datas.view);
         // Set your name
         $('#send_pseudo').click(function() {
             socket.emit('set pseudo', $('.input_pseudo').val());
+            console.log('send '+$('.input_pseudo').val())
         });
     });
-
     // Start game
     socket.on('start game', function(datas){
         // Your id
         id = datas.user_id;
-        console.log('you are '+id);
 
         // View
         $('#content').html(datas.view);
@@ -65,8 +60,8 @@ $(document).ready(function(){
             socket.emit('peche');
         });
 
-        // Add all players
-        datas.players.forEach(function(player) { console.log(player)
+        // Add all players exept you
+        datas.players.forEach(function(player) {
             addPlayer(player);
         });
 
@@ -82,7 +77,7 @@ $(document).ready(function(){
         removePlayer(user_id);
     });
 
-    // A player get something
+    // A player peche something
     socket.on('peche', function(user_id){
         addFish(user_id);
         console.log('#player_'+user_id+' catch something');
