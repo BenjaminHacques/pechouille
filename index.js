@@ -119,7 +119,6 @@ io.on('connection', function(socket){
 // Every second check id somebody catch something and send him an event
 function doesSomebodyGetSomething () {
 	var player_size = getPlayerSize();
-	console.log( Math.floor((Math.random() * player_size)))
   	if (player_size > 0) {
 	  	var random = Math.floor((Math.random() * 100) + 1);
 	  	if (random < params.fish_percent) {
