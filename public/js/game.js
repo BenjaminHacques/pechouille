@@ -22,7 +22,7 @@ $(document).ready(function(){
         }
         console.log('add #player_'+player_datas.id);
         $('#bouchons').append('<div id="bouchon_'+player_datas.id+'" class="bouchon"></div>');
-        for (var i = 0; i < player_datas.poissons; i++) {
+        for (var i = 0; i < player_datas.score; i++) {
             addFish(player_datas.id);
         };
     };

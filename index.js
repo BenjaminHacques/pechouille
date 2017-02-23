@@ -12,7 +12,7 @@ app.use(express.static('public'));
 
 var params = {
 	fishTiming: 5, //number of seconds you get after a fish beats to get it
-	fish_percent: 5
+	fish_percent: 50
 };
 // next user id
 var id = 0;
@@ -107,7 +107,7 @@ io.on('connection', function(socket){
 			} else {
 				// he got it!
 				io.sockets.to('fishing').emit('got it', socket.my_user.datas.id);
-				socket.my_user.datas.fishs++;
+				socket.my_user.datas.score++;
 				delete catchable_fishs[socket.my_user.datas.id];
 			}
 		}
