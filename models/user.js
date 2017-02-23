@@ -4,6 +4,7 @@ function User(u_id) {
 		name: '',
 		score: 0
 	};
+	this.room = '';
 }
 
 

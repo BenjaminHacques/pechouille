@@ -57,8 +57,8 @@ io.on('connection', function(socket){
 
 	// Delete this user from the game
 	socket.on('disconnect', function(){
-		if (socket.my_user.datas.name != '') {
-			socket.to('fishing').emit('bye user', socket.my_user.datas.id); // Tell all users that this user leave the game
+		if (socket.my_user.room != '') {
+			socket.to(socket.my_user.room).emit('bye user', socket.my_user.datas.id); // Tell all users that this user leave the game
 			delete players[socket.my_user.datas.id];
 			if (catchable_fishs[socket.my_user.datas.id] != null) {
 				delete catchable_fishs[socket.my_user.datas.id];
@@ -74,10 +74,12 @@ io.on('connection', function(socket){
 			socket.my_user.datas.name = pseudo;
 			console.log('user '+socket.my_user.datas.id+' set pseudo : '+pseudo);
 
-			io.to('fishing').emit('new user', socket.my_user.datas); // Tell all users that a new one is connected
-			socket.join('fishing'); // Add this player to the room of players
+			var room = 'fishing';
+			io.to(room).emit('new user', socket.my_user.datas); // Tell all users that a new one is connected
+			socket.join(room); // Add this player to the room
+			socket.my_user.room = room;
 			players[socket.my_user.datas.id] = socket.my_user.datas;
-			console.log('user '+socket.my_user.datas.id+' join room fishing');
+			console.log('user '+socket.my_user.datas.id+' join room '+room);
 			console.log(players)
 
 			// Send list of players, his id and the game view to the new player
@@ -102,11 +104,13 @@ io.on('connection', function(socket){
 			// if it's too late
 			if (new Date().getTime() > catchable_fishs[socket.my_user.datas.id] + (params.fishTiming*1000)) {
 				//too late
-				io.sockets.to('fishing').emit('too late', socket.my_user.datas.id);
+				console.log('player socket.my_user.datas.id: too late...')
+				io.sockets.to(socket.my_user.room).emit('too late', socket.my_user.datas.id);
 				delete catchable_fishs[socket.my_user.datas.id];
 			} else {
 				// he got it!
-				io.sockets.to('fishing').emit('got it', socket.my_user.datas.id);
+				console.log('player socket.my_user.datas.id: he got it!')
+				io.sockets.to(socket.my_user.room).emit('got it', socket.my_user.datas.id);
 				socket.my_user.datas.score++;
 				delete catchable_fishs[socket.my_user.datas.id];
 			}

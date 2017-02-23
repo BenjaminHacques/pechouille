@@ -15,8 +15,8 @@ $(document).ready(function(){
     var addPlayer = function(player_datas) {
         console.log(player_datas.id)
         console.log(id)
-        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div id="poissons" class="poissons_container"></div></div>');
-        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.name+'.png"), url("/img/basique.png")')
+        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div id="poissons" class="poissons_container"></div><div class="player_name">'+player_datas.name+'</div></div>');
+        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.name.toLowerCase()+'.png"), url("/img/basique.png")')
         if (player_datas.id === id) {
             $('#player_'+player_datas.id).addClass('my_player');
         }
@@ -66,6 +66,7 @@ $(document).ready(function(){
         $('#pecher').click(function() {
             console.log('pecher #bouchon_'+id)
             socket.emit('peche');
+            $('#pecher').hide();
         });
 
         // Add all players
@@ -114,6 +115,7 @@ $(document).ready(function(){
     socket.on('ca mord', function(user_id) {
         console.log('ca mord')
         $('#bouchon_'+user_id).addClass('ca_mord');
+        $('#pecher').show();
     });
 
 
