@@ -23,7 +23,8 @@ body {
 }
 
 .bouchons_container {
-    margin-top: 60%;
+    top: 60%;
+    position: absolute;
     display: flex;
 }
 .lac {
