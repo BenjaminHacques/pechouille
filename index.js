@@ -12,8 +12,9 @@ app.use(express.static('public'));
 
 var params = {
 	fishTiming: 5, //number of seconds you get after a fish beats to get it
-	fish_percent: 50
+	fish_percent: (process.argv[2] != null ? process.argv[2] : 5)
 };
+console.log(params.fish_percent+'% chance of catching fish every second');
 // next user id
 var id = 0;
 // fish that can be catched by a user
