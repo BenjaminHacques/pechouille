@@ -123,7 +123,9 @@ $(document).ready(function(){
     socket.on('ca mord', function(user_id) {
         console.log('ca mord')
         $('#bouchon_'+user_id).addClass('ca_mord');
-        $('#pecher').show();
+        if (user_id == id) {
+            $('#pecher').show();
+        }
     });
 
 
