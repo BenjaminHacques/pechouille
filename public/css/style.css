@@ -124,10 +124,24 @@ body {
     /* do smth to show that the player miss the fish */
 }
 
+.catched_fish {
+    position: relative;
+    width: 50px;
+    animation-name: catched_fish;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+}
+
 @keyframes ca_mord {
     0% {left: 0; top: 0;}
     25% {left: -10px; top: 4px;}
     50% {left: 0; top: -4px;}
     75% {left: 10px; top: 4px;}
     100% {left: 0; top: 0;}
+}
+
+@keyframes catched_fish {
+    0% {top: 0;}
+    100% {top: 100px; display: none;}
 }

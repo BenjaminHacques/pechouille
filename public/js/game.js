@@ -93,8 +93,15 @@ $(document).ready(function(){
     socket.on('got it', function(user_id){
         console.log('peche')
         $('#bouchon_'+user_id).removeClass('ca_mord');
-        addFish(user_id);
         console.log('#player_'+user_id+' catch something');
+        var poisson = $('<img>');
+        poisson.addClass('catched_fish');
+        poisson.attr('src', '/img/poisson.png');
+        $('#bouchon_'+user_id).append(poisson);
+        setTimeout(function() {
+            poisson.remove();
+            addFish(user_id);
+        }, 500);
     });
 
     // A player get something
