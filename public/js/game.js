@@ -15,8 +15,9 @@ $(document).ready(function(){
     var addPlayer = function(player_datas) {
         console.log(player_datas.id)
         console.log(id)
-        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div id="poissons" class="poissons_container"></div><div class="player_name">'+player_datas.name+'</div></div>');
-        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.name.toLowerCase()+'.png"), url("/img/basique.png")')
+        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div class="canne"></div><div id="poissons" class="poissons_container"></div><div class="player_name">'+player_datas.name+'</div></div>');
+
+        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.image+'")');
         if (player_datas.id === id) {
             $('#player_'+player_datas.id).addClass('my_player');
         }

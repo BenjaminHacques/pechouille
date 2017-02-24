@@ -44,7 +44,7 @@ body {
 .bouchon {
     z-index: 1;
     background-color: orange;
-    margin: 0 90px 0 90px;
+    margin: 0 117px 0 117px;
     display: inline-block;
     height: 12px;
     width: 20px;
@@ -52,13 +52,16 @@ body {
     border-radius: 10px 10px 0 0;
 }
 .player {
+    /*margin-top: -80px;*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
     display: inline-block;
     position: relative;
     height: 99%;
-    width: 200px;
+    width: 250px;
     border: 2px solid transparent;
 }
 
@@ -98,6 +101,14 @@ body {
 
 .error {
     color: red;
+}
+.canne {
+    position: relative;
+    width: 7px;
+    height: 200px;
+    background-color: brown;
+    margin: -200px auto 0 auto;
+    z-index: 2;
 }
 
 .ca_mord {

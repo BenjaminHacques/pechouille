@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
 var User = require('./models/user.js');
+var fs = require('fs');
 
 app.locals.basedir = appDir;
 app.set('view engine', 'pug');
@@ -73,6 +74,9 @@ io.on('connection', function(socket){
 	socket.on('set pseudo', function(pseudo){
 		if (pseudo != '') {
 			socket.my_user.datas.name = pseudo;
+			if (fs.existsSync('./public/img/'+pseudo.toLowerCase()+'.png')) {
+				socket.my_user.datas.image = pseudo.toLowerCase()+'.png';
+			}
 			console.log('user '+socket.my_user.datas.id+' set pseudo : '+pseudo);
 
 			var room = 'fishing';
