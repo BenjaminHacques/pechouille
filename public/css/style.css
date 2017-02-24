@@ -56,8 +56,11 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    image-rendering: -moz-crisp-edges;
+    image-rendering: -moz-crisp-edges; /* MOZZILA */
+    image-rendering: -o-crisp-edges; /* OPERA */
+    image-rendering: -webkit-optimize-contrast; /* CHROME */
     image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor; /* IE */
     display: inline-block;
     position: relative;
     height: 99%;
@@ -88,7 +91,6 @@ body {
     width: 100%;
 }
 .my_player {
-    background-color: lightgreen;
     border: 2px solid lightgreen;
 }
 .player_name {
