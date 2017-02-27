@@ -21,7 +21,7 @@ var id = 0;
 // fish that can be catched by a user
 var catchable_fishs = {};
 // ingame player list
-var players = {};
+var players = {'fishing_1': {}};
 var getPlayerSize = function() {
 	var size = 0, key;
 	for (key in players) {
@@ -46,6 +46,8 @@ app.get('/', function(req, res){
 });
 
 
+
+
 io.on('connection', function(socket){
 	// Initialyze new user
 	socket.my_user = new User(id++);
@@ -56,6 +58,8 @@ io.on('connection', function(socket){
 	app.render('connect', function(err, html) {
 		socket.emit('page connect', {view: html});
 	})
+
+
 
 	// Delete this user from the game
 	socket.on('disconnect', function(){
@@ -70,12 +74,16 @@ io.on('connection', function(socket){
 		console.log(players)
 	});
 
+
+
+
 	// User set his name and join the game
 	socket.on('set pseudo', function(pseudo){
 		if (pseudo != '') {
 			socket.my_user.datas.name = pseudo;
-			if (fs.existsSync('./public/img/'+pseudo.toLowerCase()+'.png')) {
-				socket.my_user.datas.image = pseudo.toLowerCase()+'.png';
+			if (fs.existsSync('./public/img/'+pseudo.toLowerCase()+'.png') && fs.existsSync('./public/img/'+pseudo.toLowerCase()+'_front.png')) {
+				socket.my_user.datas.image.back = pseudo.toLowerCase()+'.png';
+				socket.my_user.datas.image.front = pseudo.toLowerCase()+'_front.png';
 			}
 			console.log('user '+socket.my_user.datas.id+' set pseudo : '+pseudo);
 
@@ -102,6 +110,9 @@ io.on('connection', function(socket){
 		
 	});
 
+
+
+
 	// The player get something
 	socket.on('peche', function(){
 		console.log('user '+socket.my_user.datas.id+' action: peche');
@@ -125,7 +136,11 @@ io.on('connection', function(socket){
 });
 
 
-// Every second check id somebody catch something and send him an event
+
+
+
+
+// Every second check if somebody catch something and send him an event
 function doesSomebodyGetSomething () {
 	var player_size = getPlayerSize();
   	if (player_size > 0) {

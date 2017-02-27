@@ -15,9 +15,17 @@ $(document).ready(function(){
     var addPlayer = function(player_datas) {
         console.log(player_datas.id)
         console.log(id)
-        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div class="canne"></div><div id="poissons" class="poissons_container"></div><div class="player_name">'+player_datas.name+'</div></div>');
+        $('#players').append('<div id="player_'+player_datas.id+'" class="player"><div class="canne"></div><div class="player_img"></div><div id="poissons" class="poissons_container"></div><div class="player_name">'+player_datas.name+'</div></div>');
 
-        $('#player_'+player_datas.id).css('background-image', 'url("/img/'+player_datas.image+'")');
+        // bask of the player
+        $('#player_'+player_datas.id+' .player_img').css('background-image', 'url("/img/'+player_datas.image.back+'")');
+
+        // front of the player used when he catch a fish
+        document.styleSheets[0].insertRule('#player_'+player_datas.id+' .player_img:after { background-image: url("/img/'+player_datas.image.front+'"); }', 5);
+
+
+
+
         if (player_datas.id === id) {
             $('#player_'+player_datas.id).addClass('my_player');
         }
@@ -101,6 +109,12 @@ $(document).ready(function(){
         setTimeout(function() {
             poisson.remove();
             addFish(user_id);
+
+            // animate player sprite
+            $('#player_'+user_id).addClass('fisher_show_fish');
+            setTimeout(function() {
+                $('#player_'+user_id).removeClass('fisher_show_fish');
+            }, 500);
         }, 500);
     });
 

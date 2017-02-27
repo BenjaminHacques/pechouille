@@ -3,7 +3,7 @@ function User(u_id) {
 		id: u_id,
 		name: '',
 		score: 0,
-		image: 'basique.png'
+		image: { front: 'basique.png', back: 'basique.png' }
 	};
 	this.room = '';
 }
