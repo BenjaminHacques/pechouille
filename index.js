@@ -12,7 +12,7 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 
 var params = {
-	fishTiming: 3, //number of seconds you get after a fish beats to get it
+	fishTiming: (process.argv[3] != null ? process.argv[3] : 3), //number of seconds you get after a fish beats to get it
 	fish_percent: (process.argv[2] != null ? process.argv[2] : 5)
 };
 console.log(params.fish_percent+'% chance of catching fish every second');
