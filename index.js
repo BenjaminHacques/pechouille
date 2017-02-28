@@ -21,7 +21,7 @@ var id = 0;
 // fish that can be catched by a user
 var catchable_fishs = {};
 // ingame player list
-var players = {'fishing_1': {}};
+var players = {};
 var getPlayerSize = function() {
 	var size = 0, key;
 	for (key in players) {
