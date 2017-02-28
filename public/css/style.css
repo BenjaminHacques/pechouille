@@ -135,14 +135,19 @@ body {
     animation-timing-function: linear;
 }
 
-.too_late {
-    /* do smth to show that the player miss the fish */
-}
-
 .catched_fish {
     position: relative;
     width: 50px;
     animation-name: catched_fish;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+}
+
+.too_late_fish {
+    position: relative;
+    width: 50px;
+    animation-name: too_late_fish;
     animation-duration: 0.7s;
     animation-iteration-count: 1;
     animation-timing-function: ease-in;
@@ -184,6 +189,7 @@ body {
 }
 
 
+
 @keyframes ca_mord {
     0% {left: 0; top: 0;}
     25% {left: -10px; top: 4px;}
@@ -193,6 +199,12 @@ body {
 }
 
 @keyframes catched_fish {
-    0% {top: 0;}
-    100% {top: 100px; display: none;}
+    0% {top: 0; width: 30px;}
+    100% {top: 150px; display: none; width: 50px;}
+}
+
+@keyframes too_late_fish {
+    0% {top: 0; left: 0; width: 30px;}
+    50% {top: -60px; left: 50px; width: 20px;}
+    100% {top: -20px; left: 100px; display: none; width: 5px;}
 }

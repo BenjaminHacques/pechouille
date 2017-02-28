@@ -122,9 +122,14 @@ $(document).ready(function(){
     socket.on('too late', function(user_id){
         console.log('peche')
         $('#bouchon_'+user_id).removeClass('ca_mord');
-        $('#bouchon_'+user_id).removeClass('too_late');
-        $('#bouchon_'+user_id).addClass('too_late');
         console.log('#player_'+user_id+' got nothing');
+        var poisson = $('<img>');
+        poisson.addClass('too_late_fish');
+        poisson.attr('src', '/img/poisson.png');
+        $('#bouchon_'+user_id).append(poisson);
+        setTimeout(function() {
+            poisson.remove();
+        }, 700);
     });
 
     // Invalid username
