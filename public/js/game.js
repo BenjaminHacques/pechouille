@@ -146,8 +146,8 @@ $(document).ready(function(){
             $('#pecher').show();
             var randomX = Math.floor((Math.random() * 100) + 1);
             var randomY = Math.floor((Math.random() * 100) + 1);
-            $('#pecher').css('top', randomY.'vh');
-            $('#pecher').css('left', randomX.'vw');
+            $('#pecher').css('top', randomY+'vh');
+            $('#pecher').css('left', randomX+'vw');
         }
     });
 
