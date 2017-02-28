@@ -114,8 +114,8 @@ $(document).ready(function(){
             $('#player_'+user_id).addClass('fisher_show_fish');
             setTimeout(function() {
                 $('#player_'+user_id).removeClass('fisher_show_fish');
-            }, 500);
-        }, 500);
+            }, 700);
+        }, 700);
     });
 
     // A player get something
