@@ -144,6 +144,10 @@ $(document).ready(function(){
         $('#bouchon_'+user_id).addClass('ca_mord');
         if (user_id == id) {
             $('#pecher').show();
+            var randomX = Math.floor((Math.random() * 100) + 1);
+            var randomY = Math.floor((Math.random() * 100) + 1);
+            $('#pecher').css('top', randomY.'vh');
+            $('#pecher').css('left', randomX.'vw');
         }
     });
 
