@@ -120,7 +120,7 @@ io.on('connection', function(socket){
 			// if it's too late
 			if (new Date().getTime() > catchable_fishs[socket.my_user.datas.id] + (params.fishTiming*1000)) {
 				//too late
-				console.log(player socket.my_user.datas.id+': too late...')
+				console.log('player '+socket.my_user.datas.id+': too late...')
 				io.sockets.to(socket.my_user.room).emit('too late', socket.my_user.datas.id);
 				delete catchable_fishs[socket.my_user.datas.id];
 			} else {
